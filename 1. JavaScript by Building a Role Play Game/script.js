@@ -22,6 +22,23 @@ const weapons = [
   { name: 'claw hammer', power: 50 },
   { name: 'sword', power: 100 },
 ];
+const monsters = [
+  {
+    name: 'slime',
+    level: 2,
+    health: 15,
+  },
+  {
+    name: 'fanged beast',
+    level: 8,
+    health: 60,
+  },
+  {
+    name: 'dragon',
+    level: 20,
+    health: 300,
+  },
+];
 const locations = [
   {
     name: 'town square',
@@ -44,6 +61,12 @@ const locations = [
     'button text': ['Fight slime', 'Fight fanged beast', 'Go to town square'],
     'button functions': [fightSlime, fightBeast, goTown],
     text: 'You enter the cave. You see some monsters.',
+  },
+  {
+    name: 'fight',
+    'button text': ['Attack', 'Dodge', 'Run'],
+    'button functions': [attack, dodge, goTown],
+    text: 'You are fighting a monster.',
   },
 ];
 
@@ -74,10 +97,6 @@ function goCave() {
   update(locations[2]);
 }
 
-function fightDragon() {
-  console.log('Fighting dragon.');
-}
-
 function buyHealth() {
   if (gold >= 10) {
     gold -= 10;
@@ -90,7 +109,7 @@ function buyHealth() {
 }
 
 function buyWeapon() {
-  if (currentWeapon < 3) {
+  if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
       gold -= 30;
       currentWeapon++;
@@ -102,9 +121,44 @@ function buyWeapon() {
     } else {
       text.innerText = 'You do not have enough gold to buy a weapon.';
     }
+  } else {
+    text.innerText = 'You already have the most powerful weapon!';
+    button2.innerText = 'Sell weapon for 15 gold';
+    button2.onclick = sellWeapon;
   }
 }
 
-function fightSlime() {}
+function sellWeapon() {
+  if (inventory.length > 1) {
+    gold += 15;
+    goldText.innerText = gold;
+    let currentWeapon = inventory.shift();
+    text.innerText = 'You sold a ' + currentWeapon + '.';
+    text.innerText += ' In your inventory you have: ' + inventory;
+  } else {
+    text.innerText = "Don't sell your only weapon!";
+  }
+}
 
-function fightBeast() {}
+function fightSlime() {
+  fighting = 0;
+  goFight();
+}
+
+function fightBeast() {
+  fighting = 1;
+  goFight();
+}
+
+function fightDragon() {
+  fighting = 2;
+  goFight();
+}
+
+function goFight() {
+  update(locations[3]);
+}
+
+function attack() {}
+
+function dodge() {}
