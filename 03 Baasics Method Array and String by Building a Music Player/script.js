@@ -99,8 +99,11 @@ const playSong = (id) => {
   playButton.classList.add('playing');
 
   highlightCurrentSong();
+<<<<<<< HEAD
   setPlayerDisplay();
   setPlayButtonAccessibleText();
+=======
+>>>>>>> 73caade5cf17ca5695c16e7fdb4f46ab8ae17d3f
   audio.play();
 };
 
@@ -132,6 +135,7 @@ const playPreviousSong = () => {
   }
 };
 
+<<<<<<< HEAD
 const shuffle = () => {
   userData?.songs.sort(() => Math.random() - 0.5);
   userData.currentSong = null;
@@ -161,6 +165,9 @@ const setPlayerDisplay = () => {
   playingSong.textContent = currentTitle ? currentTitle : '';
   songArtist.textContent = currentArtist ? currentArtist : '';
 };
+=======
+const setPlayerDisplay = () => {};
+>>>>>>> 73caade5cf17ca5695c16e7fdb4f46ab8ae17d3f
 
 const highlightCurrentSong = () => {
   const playlistSongElements = document.querySelectorAll('.playlist-song');
