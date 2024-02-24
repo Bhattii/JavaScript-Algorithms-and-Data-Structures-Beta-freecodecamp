@@ -113,3 +113,9 @@ discardBtn.addEventListener('click', () => {
   confirmCloseDialog.close();
   reset();
 });
+
+taskForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  addOrUpdateTask();
+});
